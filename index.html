@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lab 5: Pixabay Search</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" ></script> 
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+  <script>
+
+      $(document).ready(function(){
+
+        var randImages = ["lightning", "ocean", "mexico", "blue"]
+
+        $("#searchBtn").on("click", search);
+
+        $("#keyword").val(randImages[Math.floor(Math.random() *5)]);
+        search();
+        
+        function search(){
+            $.ajax({
+
+              method: "GET",
+              url: "https://pixabay.com/api/",
+              dataType: "json",
+              data: { "key":"5589438-47a0bca778bf23fc2e8c5bf3e",
+                        "q": $("#keyword").val(),
+              "orientation": $("#orientation").val(), },
+              success: function(result,status) {
+              
+                result.hits = _.shuffle(result.hits); //shuffles all elements in an array
+
+                //alert(result.hits[0].webformatURL);
+            
+                $("#0").html(`Likes: ${result.hits[0].likes} <br> <img src='${result.hits[0].webformatURL}' width='120'>`);
+                $("#1").html(`Likes: ${result.hits[1].likes} <br> <img src='${result.hits[1].webformatURL}' width='120'>`);
+                $("#2").html(`Likes: ${result.hits[2].likes} <br> <img src='${result.hits[2].webformatURL}' width='120'>`);
+                $("#3").html(`Likes: ${result.hits[3].likes} <br> <img src='${result.hits[3].webformatURL}' width='120'>`);
+                                 
+              }
+
+            });//ajax
+         }//search()
+
+         
+
+          
+
+      });//document.ready
+
+
+  </script>
+
+</head>
+<body>
+
+  <h1> Pixabay Image Search </h1>
+  <br>
+
+  Keyword: <input id="keyword" type="text"> 
+  
+  <br>
+
+  <div class="container">
+    <select id="orientation">
+      
+    <div class="container">
+      <option value="horizontal">Horizontal</option>
+      <option value="vertical">Vertical</option>
+      </select>
+      <button id="searchBtn">Search</button>
+    </div>
+     
+
+     
+
+  </div>
+ 
+  <br><br>
+
+  <div id="images">
+      
+      <div class="container">
+    <div class="col-sm-3">
+            <div id="0"></div>
+
+    </div>
+    <div class="col-sm-3">
+           <div id="1"></div>
+    </div>
+    <div class="col-sm-3">
+           <div id="2"></div>       
+    </div>
+    <div class="col-sm-3">
+           <div id="3"></div>
+  
+  </div>
+ 
+ 
+</body>
+</html>

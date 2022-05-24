@@ -1,0 +1,38 @@
+Keyword {
+    text-align: center;
+}
+
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-family: "Pacifico", cursive;
+    font-size: 4em;
+    margin-bottom: 0px;
+    color: white;
+    text-align: center;
+
+}
+
+footer {
+    font-size: .8em;
+}
+
+input, select {
+    color: black;
+}
+
+button {
+    text-align: center;
+    padding: right;
+    color: black;
+    
+}
